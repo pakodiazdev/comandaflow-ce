@@ -1,0 +1,98 @@
+# Dockerfile para un entorno de desarrollo completo
+FROM php:fpm
+
+# Instalar dependencias del sistema y Google Chrome
+RUN apt-get update && apt-get install -y \
+    supervisor \
+    xfce4 \
+    xfce4-goodies \
+    tigervnc-standalone-server \
+    novnc \
+    websockify \
+    wget \
+    curl \
+    gnupg \
+    git \
+    sudo \
+    dbus-x11 \
+    fonts-dejavu-core \
+    fontconfig \
+    xfonts-base \
+    xfonts-75dpi \
+    xfonts-100dpi \
+    x11-xserver-utils \
+    apt-transport-https \
+    ca-certificates
+
+# Instalar Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get install -y ./google-chrome-stable_current_amd64.deb \
+    && rm google-chrome-stable_current_amd64.deb
+
+# Instalar Firefox
+RUN apt-get install -y firefox-esr
+
+# Instalar VS Code
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg \
+    && install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/ \
+    && sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' \
+    && apt-get update \
+    && apt-get install -y code
+
+# Instalar code-server (VS Code Web)
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+# Copiar scripts optimizados para contenedor
+COPY docker/dev/chrome-launcher.sh /usr/local/bin/chrome-launcher.sh
+COPY docker/dev/firefox-launcher.sh /usr/local/bin/firefox-launcher.sh
+COPY docker/dev/vscode-launcher.sh /usr/local/bin/vscode-launcher.sh
+RUN chmod +x /usr/local/bin/chrome-launcher.sh /usr/local/bin/firefox-launcher.sh /usr/local/bin/vscode-launcher.sh
+
+# Crear wrapper para el comando code que use nuestro launcher
+RUN mv /usr/bin/code /usr/bin/code-original && \
+    ln -s /usr/local/bin/vscode-launcher.sh /usr/bin/code
+
+# Configurar entorno de root
+WORKDIR /root
+
+# Instalar NVM, Node.js, npm y yarn
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 22.9.0
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION && npm install -g yarn && nvm alias default $NODE_VERSION
+
+# Configuración de VNC y Supervisor
+RUN mkdir -p /root/.vnc && \
+    echo "devbase" | vncpasswd -f > /root/.vnc/passwd && \
+    chmod 600 /root/.vnc/passwd
+
+# Crear configuración de VNC para redimensionamiento dinámico
+RUN echo "desktop=DevBase Desktop" > /root/.vnc/config && \
+    echo "geometry=1024x768" >> /root/.vnc/config && \
+    echo "localhost=no" >> /root/.vnc/config && \
+    echo "alwaysshared=yes" >> /root/.vnc/config && \
+    echo "SecurityTypes=None" >> /root/.vnc/config
+COPY docker/dev/xstartup /root/.vnc/xstartup
+RUN chmod +x /root/.vnc/xstartup
+
+RUN mkdir -p /var/log/supervisor
+COPY docker/dev/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copiar archivo de redirección para noVNC
+COPY docker/dev/index.html /usr/share/novnc/index.html
+
+# Script de inicio
+COPY docker/dev/start.sh /start.sh
+COPY docker/dev/start-desktop.sh /start-desktop.sh
+COPY docker/dev/configure-xfce.sh /configure-xfce.sh
+COPY docker/dev/configure-vscode.sh /configure-vscode.sh
+COPY docker/dev/configure-code-server.sh /configure-code-server.sh
+COPY docker/dev/vnc-refresh.sh /vnc-refresh.sh
+COPY docker/dev/resolution-monitor.sh /resolution-monitor.sh
+COPY docker/dev/create-shortcuts.sh /create-shortcuts.sh
+RUN chmod +x /start.sh /start-desktop.sh /configure-xfce.sh /configure-vscode.sh /configure-code-server.sh /vnc-refresh.sh /resolution-monitor.sh /create-shortcuts.sh
+
+EXPOSE 80 443 5901 6080 8080
+
+CMD ["/start.sh"]

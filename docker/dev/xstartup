@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Log environment for debugging
+echo "--- xstartup environment ---" > /root/xstartup.log
+env >> /root/xstartup.log
+echo "--------------------------" >> /root/xstartup.log
+
+# Cargar recursos X11
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+
+# Configurar variables de entorno para XFCE
+export XDG_CURRENT_DESKTOP="XFCE"
+export XDG_SESSION_DESKTOP="xfce"
+export XDG_SESSION_TYPE="x11"
+
+# Unset session management
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+# Configurar el fondo inicial sólido
+xsetroot -solid "#2F4F4F"
+
+# Habilitar redimensionamiento dinámico con xrandr si está disponible
+if command -v xrandr >/dev/null 2>&1; then
+    xrandr --output VNC-0 --auto 2>/dev/null || true
+fi
+
+# Configurar VNC para redimensionamiento
+vncconfig -iconic &
+
+# Script para monitorear y reconfigurar el fondo automáticamente
+(
+    sleep 5  # Esperar a que XFCE se inicie
+    while true; do
+        # Reconfigurar fondo cada vez que detectemos cambios
+        xsetroot -solid "#2F4F4F" 2>/dev/null || true
+        
+        # Si xfdesktop está corriendo, reconfigurarlo
+        if pgrep xfdesktop >/dev/null; then
+            xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/color-style -s 1 2>/dev/null || true
+            xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/color1 -t uint -t uint -t uint -t uint -s 47 -s 79 -s 79 -s 255 2>/dev/null || true
+        fi
+        
+        sleep 5
+    done
+) &
+
+# Iniciar XFCE con configuraciones optimizadas
+startxfce4 &
+
+# Log process list after starting XFCE
+echo "--- xstartup processes ---" >> /root/xstartup.log
+ps -ef >> /root/xstartup.log
+echo "--------------------------" >> /root/xstartup.log
+
+wait

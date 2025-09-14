@@ -1,0 +1,11 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+    container_name: dev_container
+    ports:
+      - "3000:3000"
+      - "5901:5901"
+      - "6080:6080"
+      - "8080:8080"
