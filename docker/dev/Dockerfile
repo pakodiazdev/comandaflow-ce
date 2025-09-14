@@ -22,7 +22,20 @@ RUN apt-get update && apt-get install -y \
     xfonts-100dpi \
     x11-xserver-utils \
     apt-transport-https \
-    ca-certificates
+    ca-certificates \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libpq-dev \
+    unzip
+
+# Configurar extensiones GD con FreeType y JPEG
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# Instalar extensiones PHP necesarias para Laravel (incluyendo PostgreSQL)
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip
 
 # Instalar Google Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -41,6 +54,15 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
 
 # Instalar code-server (VS Code Web)
 RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Instalar Laravel Installer globalmente
+RUN composer global require laravel/installer
+
+# Configurar PATH para Composer global
+ENV PATH="/root/.config/composer/vendor/bin:${PATH}"
 
 # Copiar scripts optimizados para contenedor
 COPY docker/dev/chrome-launcher.sh /usr/local/bin/chrome-launcher.sh

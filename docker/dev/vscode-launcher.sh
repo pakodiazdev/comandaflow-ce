@@ -25,9 +25,9 @@ VSCODE_ARGS=(
 # Agregar argumentos pasados al script
 VSCODE_ARGS+=("$@")
 
-# Si no se pasaron argumentos, abrir directorio actual
+# Si no se pasaron argumentos, abrir directorio workspace
 if [ $# -eq 0 ]; then
-    VSCODE_ARGS+=(".")
+    VSCODE_ARGS+=("/workspace")
 fi
 
 # Ejecutar VS Code

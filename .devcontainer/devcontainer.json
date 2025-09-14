@@ -1,0 +1,76 @@
+{
+    "name": "DevBase - Entorno de Desarrollo Completo",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    
+    // Configuración para VS Code
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "php.validate.executablePath": "/usr/local/bin/php",
+                "php.suggest.basic": false,
+                "composer.executablePath": "/usr/local/bin/composer"
+            },
+            
+            // Extensiones recomendadas para desarrollo PHP/Laravel
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "ms-vscode.vscode-typescript-next",
+                "bradlc.vscode-tailwindcss",
+                "esbenp.prettier-vscode",
+                "ms-python.python",
+                "formulahendry.auto-rename-tag",
+                "ms-vscode.vscode-json",
+                "github.github-vscode-theme",
+                "PKief.material-icon-theme",
+                "ryannaddy.laravel-artisan",
+                "onecentlin.laravel5-snippets",
+                "amiralizadeh9480.laravel-extra-intellisense"
+            ]
+        }
+    },
+    
+    // Características del contenedor
+    "features": {},
+    
+    // Comandos de post-create
+    "postCreateCommand": "composer install && npm install",
+    
+    // Reenvío de puertos
+    "forwardPorts": [3000, 5901, 6080, 8080],
+    "portsAttributes": {
+        "3000": {
+            "label": "App Server",
+            "onAutoForward": "notify"
+        },
+        "5901": {
+            "label": "VNC Direct"
+        },
+        "6080": {
+            "label": "VNC Web"
+        },
+        "8080": {
+            "label": "VS Code Server"
+        }
+    },
+    
+    // Variables de entorno
+    "containerEnv": {
+        "DISPLAY": ":1"
+    },
+    
+    // Montajes adicionales
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    
+    // Usuario para desarrollo
+    "remoteUser": "root",
+    
+    // Configuración de vida útil
+    "updateContentCommand": "composer install && npm install"
+}
