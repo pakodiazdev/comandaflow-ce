@@ -29,10 +29,21 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libonig-dev \
     libpq-dev \
-    unzip
+    unzip \
+    locales
 
 # Configurar extensiones GD con FreeType y JPEG
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# Configurar locales para evitar errores de locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    echo "C.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen && \
+    update-locale LANG=C.UTF-8
+
+# Configurar variables de entorno de locale
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # Instalar extensiones PHP necesarias para Laravel (incluyendo PostgreSQL)
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip
@@ -79,10 +90,34 @@ WORKDIR /root
 
 # Instalar NVM, Node.js, npm y yarn
 ENV NVM_DIR /root/.nvm
-ENV NODE_VERSION 22.9.0
+ENV NODE_VERSION 22.12.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION && npm install -g yarn && nvm alias default $NODE_VERSION
+
+# Instalar dependencias adicionales para Cypress
+RUN apt-get update && apt-get install -y \
+    libgtk-3-0 \
+    libgbm1 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libxtst6 \
+    xauth \
+    xvfb \
+    libxrandr2 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxi6 \
+    libxfixes3 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar Cypress globalmente
+RUN . $NVM_DIR/nvm.sh && npm install -g cypress
+
+# Verificar instalación de Cypress
+RUN . $NVM_DIR/nvm.sh && cypress verify
 
 # Configuración de VNC y Supervisor
 RUN mkdir -p /root/.vnc && \

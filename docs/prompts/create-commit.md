@@ -1,0 +1,1 @@
+a partir del diff.txt crea el commit con el issue nombrado siguiendo la guia de commit del commits.md 

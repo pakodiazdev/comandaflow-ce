@@ -1,5 +1,5 @@
 {
-    "name": "DevBase - Entorno de Desarrollo Completo",
+    "name": "ComandaFlow CE",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "dev",
     "workspaceFolder": "/workspace",
@@ -16,7 +16,7 @@
                 "composer.executablePath": "/usr/local/bin/composer"
             },
             
-            // Extensiones recomendadas para desarrollo PHP/Laravel
+            // Extensiones recomendadas para desarrollo PHP/Laravel y React
             "extensions": [
                 "bmewburn.vscode-intelephense-client",
                 "ms-vscode.vscode-typescript-next",
@@ -29,18 +29,18 @@
                 "PKief.material-icon-theme",
                 "ryannaddy.laravel-artisan",
                 "onecentlin.laravel5-snippets",
-                "amiralizadeh9480.laravel-extra-intellisense"
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "ms-vscode.vscode-eslint",
+                "dbaeumer.vscode-eslint",
+                "bradlc.vscode-tailwindcss",
+                "ms-vscode.vscode-react-refactor",
+                "dsznajder.es7-react-js-snippets",
+                "ms-vscode.vscode-node-debug2",
+                "ms-vscode.vscode-typescript-next"
             ]
         }
     },
-    
-    // Características del contenedor
     "features": {},
-    
-    // Comandos de post-create
-    "postCreateCommand": "composer install && npm install",
-    
-    // Reenvío de puertos
     "forwardPorts": [3000, 5901, 6080, 8080],
     "portsAttributes": {
         "3000": {
@@ -56,21 +56,11 @@
         "8080": {
             "label": "VS Code Server"
         }
-    },
-    
-    // Variables de entorno
-    "containerEnv": {
-        "DISPLAY": ":1"
-    },
-    
+    }, 
     // Montajes adicionales
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
-    
     // Usuario para desarrollo
-    "remoteUser": "root",
-    
-    // Configuración de vida útil
-    "updateContentCommand": "composer install && npm install"
+    "remoteUser": "root"
 }

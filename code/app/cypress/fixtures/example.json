@@ -1,0 +1,18 @@
+{
+  "user": {
+    "email": "test@example.com",
+    "password": "password123",
+    "name": "Test User"
+  },
+  "app": {
+    "title": "React App",
+    "description": "React application with Vite and SWC"
+  },
+  "api": {
+    "baseUrl": "http://localhost",
+    "endpoints": {
+      "users": "/api/users",
+      "auth": "/api/auth"
+    }
+  }
+}
