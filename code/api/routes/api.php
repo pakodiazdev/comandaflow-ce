@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HealthController;
 
 /**
  * @OA\Info(
@@ -15,13 +17,15 @@ namespace App\Http\Controllers;
  *          url="https://opensource.org/licenses/MIT"
  *      )
  * )
- * 
+ *
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="ComandaFlow CE API Server"
  * )
  */
-abstract class Controller
-{
-    //
-}
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get('/health', [HealthController::class, 'check'])->name('api.health');

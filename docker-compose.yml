@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: ./docker/dev/Dockerfile
     container_name: dev_container
+    hostname: ${APP_PREFIX}
     ports:
       - "3000:3000"
       - "5901:5901"
