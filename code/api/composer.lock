@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b44460f384589ec82d9a1f3dc7340e34",
+    "content-hash": "955e8929bf6e3eaad8db1893c7155a02",
     "packages": [
         {
             "name": "brick/math",
@@ -134,6 +134,45 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "cf-ce/hello-world",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/hello-world",
+                "reference": "32eb2ee0432b0637d65a043d7a9f7b704f592284"
+            },
+            "require": {
+                "illuminate/support": "^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CF\\HelloWorld\\HelloWorldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CF\\HelloWorld\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CF Team",
+                    "email": "dev@comandaflow.com"
+                }
+            ],
+            "description": "A simple Hello World package for CF",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "darkaonline/l5-swagger",
@@ -9647,7 +9686,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "cf-ce/hello-world": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cf-ce/hello-world": "@dev",
         "darkaonline/l5-swagger": "^9.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
@@ -76,5 +77,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "hello-world": {
+            "type": "path",
+            "url": "packages/hello-world"
+        }
+    }
 }
