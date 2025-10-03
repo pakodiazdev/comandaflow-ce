@@ -30,10 +30,16 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libpq-dev \
     unzip \
-    locales
+    locales \
+    tzdata
 
 # Configurar extensiones GD con FreeType y JPEG
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# Configurar zona horaria
+ARG TIMEZONE=UTC
+ENV TZ=$TIMEZONE
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Configurar locales para evitar errores de locale
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \

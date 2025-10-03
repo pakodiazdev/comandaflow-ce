@@ -1,0 +1,33 @@
+{
+    "name": "cf-ce/time-tracker",
+    "description": "Time tracking package for GitHub issues",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JFcoDiaz",
+            "email": "me@pakodiaz.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^12.0",
+        "illuminate/console": "^12.0",
+        "guzzlehttp/guzzle": "^7.8",
+        "nesbot/carbon": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CF\\CE\\TimeTracker\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CF\\CE\\TimeTracker\\TimeTrackerServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

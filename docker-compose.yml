@@ -3,19 +3,22 @@ services:
     build:
       context: .
       dockerfile: ./docker/dev/Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE:-UTC}
     container_name: dev_container
     hostname: ${APP_PREFIX}
     ports:
-      - "3000:3000"
-      - "5901:5901"
-      - "6080:6080"
-      - "8080:8080"
+      - "${DEV_NODE_PORT:-3000}:3000"
+      - "${DEV_VNC_PORT:-5901}:5901"
+      - "${DEV_NOVNC_PORT:-6080}:6080"
+      - "${DEV_VSCODE_PORT:-8080}:8080"
     volumes:
       - ./:/workspace
       - /workspace/node_modules
     working_dir: /workspace
     environment:
       - DISPLAY=:1
+      - TZ=${TIMEZONE:-UTC}
     depends_on:
       - postgres
     command: ["./docker/dev/init.sh"]
@@ -24,8 +27,8 @@ services:
     image: nginx:alpine
     container_name: nginx_server
     ports:
-      - "80:80"
-      - "443:443"
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
     volumes:
       - ./:/workspace
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -41,7 +44,7 @@ services:
       POSTGRES_USER: devbase
       POSTGRES_PASSWORD: devbase123
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -54,7 +57,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin123
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
-      - "5050:80"
+      - "${PGADMIN_PORT:-5050}:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:

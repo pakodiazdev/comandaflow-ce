@@ -65,7 +65,20 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Time Tracker Timezone
+    |--------------------------------------------------------------------------
+    |
+    | This timezone is specifically used by the Time Tracker package for
+    | recording work sessions. It's independent from the application timezone
+    | allowing Laravel to run in UTC while time tracking uses local timezone.
+    |
+    */
+
+    'time_tracker_timezone' => env('TIME_TRACKER_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
