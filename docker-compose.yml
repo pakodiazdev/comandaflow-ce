@@ -15,6 +15,7 @@ services:
     volumes:
       - ./:/workspace
       - /workspace/node_modules
+      - vendor_data:/workspace/code/api/vendor
     working_dir: /workspace
     environment:
       - DISPLAY=:1
@@ -67,3 +68,4 @@ services:
 volumes:
   postgres_data:
   pgadmin_data:
+  vendor_data:

@@ -36,8 +36,10 @@ install_composer_dependencies() {
         print_status "Verificando dependencias de Composer para API Laravel..."
         
         cd /workspace/code/api
-        if [ ! -d "vendor" ] || [ ! -f "vendor/autoload.php" ]; then
-            print_status "Instalando dependencias de Composer..."
+        
+        # Verificar si vendor está vacío o no existe autoload.php
+        if [ ! -f "vendor/autoload.php" ] || [ -z "$(ls -A vendor 2>/dev/null)" ]; then
+            print_status "El directorio vendor está vacío o no existe autoload.php, instalando dependencias..."
             composer install --no-interaction --prefer-dist --optimize-autoloader
             print_success "Dependencias de Composer instaladas correctamente"
         else
@@ -119,8 +121,17 @@ setup_laravel() {
         # Ejecutar migraciones si existen
         if [ -d "database/migrations" ] && [ "$(ls -A database/migrations)" ]; then
             print_status "Ejecutando migraciones de base de datos..."
-            php artisan migrate --no-interaction || print_warning "No se pudieron ejecutar las migraciones"
+            php artisan migrate --force || print_warning "No se pudieron ejecutar las migraciones"
+            print_success "Migraciones ejecutadas correctamente"
         fi
+        
+        # Generar certificados de Passport si no existen
+        print_status "Ejecutando setup_passport_keys..."
+        setup_passport_keys
+        
+        # Ejecutar seeders
+        print_status "Ejecutando run_seeders..."
+        run_seeders
         
         # Limpiar cache (sin comandos que requieran DB)
         print_status "Limpiando cache de Laravel..."
@@ -131,6 +142,53 @@ setup_laravel() {
         print_success "Laravel configurado correctamente"
     else
         print_warning "No se detectó proyecto Laravel (artisan no encontrado)"
+    fi
+}
+
+# Función para configurar las claves de Passport
+setup_passport_keys() {
+    if [ -f "/workspace/code/api/artisan" ]; then
+        print_status "Verificando certificados de Passport..."
+        
+        cd /workspace/code/api
+        
+        # Verificar si las claves ya existen
+        if [ ! -f "storage/oauth-private.key" ] || [ ! -f "storage/oauth-public.key" ]; then
+            print_status "Generando certificados de Passport..."
+            php artisan passport:keys --force
+            print_success "Certificados de Passport generados correctamente"
+        else
+            print_success "Certificados de Passport ya existen"
+        fi
+        
+        cd /workspace
+    fi
+}
+
+# Función para ejecutar seeders
+run_seeders() {
+    if [ -f "/workspace/code/api/artisan" ]; then
+        print_status "Ejecutando seeders..."
+        
+        cd /workspace/code/api
+        
+        # Ejecutar seeder de roles y permisos
+        print_status "Ejecutando RoleSeeder (roles y permisos)..."
+        php artisan db:seed --class=RoleSeeder --force || print_warning "No se pudo ejecutar RoleSeeder"
+        
+        # Ejecutar seeder de clientes Passport
+        print_status "Ejecutando PassportClientSeeder..."
+        php artisan db:seed --class=PassportClientSeeder --force || print_warning "No se pudo ejecutar PassportClientSeeder"
+        
+        # Ejecutar seeder de usuarios por defecto
+        print_status "Ejecutando DefaultUsersSeeder..."
+        php artisan db:seed --class=DefaultUsersSeeder --force || print_warning "No se pudo ejecutar DefaultUsersSeeder"
+        
+        print_success "Seeders ejecutados correctamente"
+        cd /workspace
+        print_success "run_seeders completado"
+    else
+        print_warning "No se encontró artisan para run_seeders"
     fi
 }
 

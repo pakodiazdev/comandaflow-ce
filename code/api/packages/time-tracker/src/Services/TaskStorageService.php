@@ -104,9 +104,7 @@ class TaskStorageService
             }
         }
 
-        return [
-            ['date' => $this->nowInTimeTrackerTimezone()->format('Y-m-d'), 'start' => 'HH:MM', 'end' => 'HH:MM']
-        ];
+        return [];
     }
 
     /**

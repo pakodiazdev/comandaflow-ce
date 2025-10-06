@@ -10,11 +10,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cf-ce/auth": "@dev",
         "cf-ce/hello-world": "@dev",
         "cf-ce/time-tracker": "@dev",
         "darkaonline/l5-swagger": "^9.0",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/passport": "^12.0",
+        "laravel/tinker": "^2.10.1",
+        "spatie/laravel-permission": "^6.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -80,6 +83,10 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": {
+        "cf-auth": {
+            "type": "path",
+            "url": "packages/cf-auth"
+        },
         "hello-world": {
             "type": "path",
             "url": "packages/hello-world"
