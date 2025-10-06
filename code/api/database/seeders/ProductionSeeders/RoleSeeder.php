@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\ProductionSeeders;
 
 use CF\CE\Auth\Models\Role;
 use CF\CE\Auth\Models\Permission;

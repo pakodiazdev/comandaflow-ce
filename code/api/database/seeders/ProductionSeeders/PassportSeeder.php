@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\ProductionSeeders;
 
 use Illuminate\Database\Seeder;
 use Laravel\Passport\Client;

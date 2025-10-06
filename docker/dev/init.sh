@@ -172,17 +172,12 @@ run_seeders() {
         
         cd /workspace/code/api
         
-        # Ejecutar seeder de roles y permisos
-        print_status "Ejecutando RoleSeeder (roles y permisos)..."
-        php artisan db:seed --class=RoleSeeder --force || print_warning "No se pudo ejecutar RoleSeeder"
-        
-        # Ejecutar seeder de clientes Passport
-        print_status "Ejecutando PassportClientSeeder..."
-        php artisan db:seed --class=PassportClientSeeder --force || print_warning "No se pudo ejecutar PassportClientSeeder"
-        
-        # Ejecutar seeder de usuarios por defecto
-        print_status "Ejecutando DefaultUsersSeeder..."
-        php artisan db:seed --class=DefaultUsersSeeder --force || print_warning "No se pudo ejecutar DefaultUsersSeeder"
+        # Ejecutar DatabaseSeeder que maneja la lógica condicional
+        # - Siempre ejecuta ProductionSeeders (roles, permisos, usuarios base)
+        # - Ejecuta DevSeeders solo en entornos de desarrollo/testing
+        # - Ejecuta FakeSeeders solo si SEED_FAKE=true
+        print_status "Ejecutando DatabaseSeeder..."
+        php artisan db:seed --force || print_warning "No se pudo ejecutar DatabaseSeeder"
         
         print_success "Seeders ejecutados correctamente"
         cd /workspace

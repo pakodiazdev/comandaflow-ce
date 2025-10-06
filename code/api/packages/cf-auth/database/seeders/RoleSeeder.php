@@ -37,141 +37,141 @@ class RoleSeeder extends Seeder
     {
         $permissions = [
             // User Management
-            ['code' => 'users.view', 'description' => 'View users list'],
-            ['code' => 'users.show', 'description' => 'View specific user details'],
-            ['code' => 'users.create', 'description' => 'Create new users'],
-            ['code' => 'users.update', 'description' => 'Update user information'],
-            ['code' => 'users.delete', 'description' => 'Delete users'],
-            ['code' => 'users.assign_roles', 'description' => 'Assign roles to users'],
-            ['code' => 'users.revoke_roles', 'description' => 'Revoke roles from users'],
-            ['code' => 'users.assign_permissions', 'description' => 'Assign direct permissions to users'],
-            ['code' => 'users.revoke_permissions', 'description' => 'Revoke direct permissions from users'],
-            ['code' => 'users.change_password', 'description' => 'Change user passwords'],
-            ['code' => 'users.export', 'description' => 'Export users data'],
-            ['code' => 'users.import', 'description' => 'Import users data'],
+            ['name' => 'users.view', 'description' => 'View users list'],
+            ['name' => 'users.show', 'description' => 'View specific user details'],
+            ['name' => 'users.create', 'description' => 'Create new users'],
+            ['name' => 'users.update', 'description' => 'Update user information'],
+            ['name' => 'users.delete', 'description' => 'Delete users'],
+            ['name' => 'users.assign_roles', 'description' => 'Assign roles to users'],
+            ['name' => 'users.revoke_roles', 'description' => 'Revoke roles from users'],
+            ['name' => 'users.assign_permissions', 'description' => 'Assign direct permissions to users'],
+            ['name' => 'users.revoke_permissions', 'description' => 'Revoke direct permissions from users'],
+            ['name' => 'users.change_password', 'description' => 'Change user passwords'],
+            ['name' => 'users.export', 'description' => 'Export users data'],
+            ['name' => 'users.import', 'description' => 'Import users data'],
 
             // Role Management
-            ['code' => 'roles.view', 'description' => 'View roles list'],
-            ['code' => 'roles.show', 'description' => 'View specific role details'],
-            ['code' => 'roles.create', 'description' => 'Create new roles'],
-            ['code' => 'roles.update', 'description' => 'Update role information'],
-            ['code' => 'roles.delete', 'description' => 'Delete roles'],
-            ['code' => 'roles.assign_permissions', 'description' => 'Assign permissions to roles'],
-            ['code' => 'roles.revoke_permissions', 'description' => 'Revoke permissions from roles'],
+            ['name' => 'roles.view', 'description' => 'View roles list'],
+            ['name' => 'roles.show', 'description' => 'View specific role details'],
+            ['name' => 'roles.create', 'description' => 'Create new roles'],
+            ['name' => 'roles.update', 'description' => 'Update role information'],
+            ['name' => 'roles.delete', 'description' => 'Delete roles'],
+            ['name' => 'roles.assign_permissions', 'description' => 'Assign permissions to roles'],
+            ['name' => 'roles.revoke_permissions', 'description' => 'Revoke permissions from roles'],
 
             // Permission Management
-            ['code' => 'permissions.view', 'description' => 'View permissions list'],
-            ['code' => 'permissions.show', 'description' => 'View specific permission details'],
-            ['code' => 'permissions.create', 'description' => 'Create new permissions'],
-            ['code' => 'permissions.update', 'description' => 'Update permission information'],
-            ['code' => 'permissions.delete', 'description' => 'Delete permissions'],
+            ['name' => 'permissions.view', 'description' => 'View permissions list'],
+            ['name' => 'permissions.show', 'description' => 'View specific permission details'],
+            ['name' => 'permissions.create', 'description' => 'Create new permissions'],
+            ['name' => 'permissions.update', 'description' => 'Update permission information'],
+            ['name' => 'permissions.delete', 'description' => 'Delete permissions'],
 
             // Profile Management
-            ['code' => 'profile.view', 'description' => 'View own profile'],
-            ['code' => 'profile.update', 'description' => 'Update own profile'],
-            ['code' => 'profile.change_password', 'description' => 'Change own password'],
+            ['name' => 'profile.view', 'description' => 'View own profile'],
+            ['name' => 'profile.update', 'description' => 'Update own profile'],
+            ['name' => 'profile.change_password', 'description' => 'Change own password'],
 
             // Dashboard & Reports
-            ['code' => 'dashboard.view', 'description' => 'Access main dashboard'],
-            ['code' => 'dashboard.admin', 'description' => 'Access admin dashboard'],
-            ['code' => 'reports.view', 'description' => 'View reports'],
-            ['code' => 'reports.create', 'description' => 'Create reports'],
-            ['code' => 'reports.export', 'description' => 'Export reports'],
+            ['name' => 'dashboard.view', 'description' => 'Access main dashboard'],
+            ['name' => 'dashboard.admin', 'description' => 'Access admin dashboard'],
+            ['name' => 'reports.view', 'description' => 'View reports'],
+            ['name' => 'reports.create', 'description' => 'Create reports'],
+            ['name' => 'reports.export', 'description' => 'Export reports'],
 
             // System Settings
-            ['code' => 'settings.view', 'description' => 'View system settings'],
-            ['code' => 'settings.update', 'description' => 'Update system settings'],
-            ['code' => 'settings.advanced', 'description' => 'Access advanced settings'],
+            ['name' => 'settings.view', 'description' => 'View system settings'],
+            ['name' => 'settings.update', 'description' => 'Update system settings'],
+            ['name' => 'settings.advanced', 'description' => 'Access advanced settings'],
 
             // API Management
-            ['code' => 'api.access', 'description' => 'Access API endpoints'],
-            ['code' => 'api.admin', 'description' => 'Admin-level API access'],
+            ['name' => 'api.access', 'description' => 'Access API endpoints'],
+            ['name' => 'api.admin', 'description' => 'Admin-level API access'],
 
             // File Management
-            ['code' => 'files.view', 'description' => 'View files'],
-            ['code' => 'files.upload', 'description' => 'Upload files'],
-            ['code' => 'files.download', 'description' => 'Download files'],
-            ['code' => 'files.delete', 'description' => 'Delete files'],
+            ['name' => 'files.view', 'description' => 'View files'],
+            ['name' => 'files.upload', 'description' => 'Upload files'],
+            ['name' => 'files.download', 'description' => 'Download files'],
+            ['name' => 'files.delete', 'description' => 'Delete files'],
 
             // Audit & Logs
-            ['code' => 'logs.view', 'description' => 'View system logs'],
-            ['code' => 'audit.view', 'description' => 'View audit trail'],
+            ['name' => 'logs.view', 'description' => 'View system logs'],
+            ['name' => 'audit.view', 'description' => 'View audit trail'],
 
             // Content Management
-            ['code' => 'content.view', 'description' => 'View content'],
-            ['code' => 'content.create', 'description' => 'Create content'],
-            ['code' => 'content.update', 'description' => 'Update content'],
-            ['code' => 'content.delete', 'description' => 'Delete content'],
-            ['code' => 'content.publish', 'description' => 'Publish content'],
+            ['name' => 'content.view', 'description' => 'View content'],
+            ['name' => 'content.create', 'description' => 'Create content'],
+            ['name' => 'content.update', 'description' => 'Update content'],
+            ['name' => 'content.delete', 'description' => 'Delete content'],
+            ['name' => 'content.publish', 'description' => 'Publish content'],
 
             // Communication
-            ['code' => 'notifications.view', 'description' => 'View notifications'],
-            ['code' => 'notifications.send', 'description' => 'Send notifications'],
-            ['code' => 'messages.view', 'description' => 'View messages'],
-            ['code' => 'messages.send', 'description' => 'Send messages'],
+            ['name' => 'notifications.view', 'description' => 'View notifications'],
+            ['name' => 'notifications.send', 'description' => 'Send notifications'],
+            ['name' => 'messages.view', 'description' => 'View messages'],
+            ['name' => 'messages.send', 'description' => 'Send messages'],
 
             // Restaurant Business Specific
-            ['code' => 'orders.view', 'description' => 'View orders'],
-            ['code' => 'orders.create', 'description' => 'Create orders'],
-            ['code' => 'orders.update', 'description' => 'Update orders'],
-            ['code' => 'orders.delete', 'description' => 'Delete orders'],
-            ['code' => 'orders.approve', 'description' => 'Approve orders'],
-            ['code' => 'orders.send_to_kitchen', 'description' => 'Send orders to kitchen'],
-            ['code' => 'orders.mark_ready', 'description' => 'Mark orders as ready'],
-            ['code' => 'orders.mark_delivered', 'description' => 'Mark orders as delivered'],
+            ['name' => 'orders.view', 'description' => 'View orders'],
+            ['name' => 'orders.create', 'description' => 'Create orders'],
+            ['name' => 'orders.update', 'description' => 'Update orders'],
+            ['name' => 'orders.delete', 'description' => 'Delete orders'],
+            ['name' => 'orders.approve', 'description' => 'Approve orders'],
+            ['name' => 'orders.send_to_kitchen', 'description' => 'Send orders to kitchen'],
+            ['name' => 'orders.mark_ready', 'description' => 'Mark orders as ready'],
+            ['name' => 'orders.mark_delivered', 'description' => 'Mark orders as delivered'],
 
-            ['code' => 'products.view', 'description' => 'View products/menu items'],
-            ['code' => 'products.create', 'description' => 'Create products/menu items'],
-            ['code' => 'products.update', 'description' => 'Update products/menu items'],
-            ['code' => 'products.delete', 'description' => 'Delete products/menu items'],
+            ['name' => 'products.view', 'description' => 'View products/menu items'],
+            ['name' => 'products.create', 'description' => 'Create products/menu items'],
+            ['name' => 'products.update', 'description' => 'Update products/menu items'],
+            ['name' => 'products.delete', 'description' => 'Delete products/menu items'],
 
-            ['code' => 'customers.view', 'description' => 'View customers'],
-            ['code' => 'customers.create', 'description' => 'Create customers'],
-            ['code' => 'customers.update', 'description' => 'Update customers'],
-            ['code' => 'customers.delete', 'description' => 'Delete customers'],
+            ['name' => 'customers.view', 'description' => 'View customers'],
+            ['name' => 'customers.create', 'description' => 'Create customers'],
+            ['name' => 'customers.update', 'description' => 'Update customers'],
+            ['name' => 'customers.delete', 'description' => 'Delete customers'],
 
-            ['code' => 'inventory.view', 'description' => 'View inventory'],
-            ['code' => 'inventory.update', 'description' => 'Update inventory'],
-            ['code' => 'inventory.reports', 'description' => 'View inventory reports'],
-            ['code' => 'inventory.alerts', 'description' => 'Manage stock alerts'],
+            ['name' => 'inventory.view', 'description' => 'View inventory'],
+            ['name' => 'inventory.update', 'description' => 'Update inventory'],
+            ['name' => 'inventory.reports', 'description' => 'View inventory reports'],
+            ['name' => 'inventory.alerts', 'description' => 'Manage stock alerts'],
 
             // Tables Management
-            ['code' => 'tables.view', 'description' => 'View restaurant tables'],
-            ['code' => 'tables.create', 'description' => 'Create restaurant tables'],
-            ['code' => 'tables.update', 'description' => 'Update restaurant tables'],
-            ['code' => 'tables.delete', 'description' => 'Delete restaurant tables'],
-            ['code' => 'tables.assign', 'description' => 'Assign tables to orders'],
+            ['name' => 'tables.view', 'description' => 'View restaurant tables'],
+            ['name' => 'tables.create', 'description' => 'Create restaurant tables'],
+            ['name' => 'tables.update', 'description' => 'Update restaurant tables'],
+            ['name' => 'tables.delete', 'description' => 'Delete restaurant tables'],
+            ['name' => 'tables.assign', 'description' => 'Assign tables to orders'],
 
             // Financial
-            ['code' => 'finances.view', 'description' => 'View financial data'],
-            ['code' => 'finances.manage', 'description' => 'Manage financial data'],
-            ['code' => 'finances.reports', 'description' => 'View financial reports'],
-            ['code' => 'cash.open_close', 'description' => 'Open and close cash register'],
-            ['code' => 'payments.process', 'description' => 'Process payments'],
-            ['code' => 'discounts.approve', 'description' => 'Approve discounts'],
+            ['name' => 'finances.view', 'description' => 'View financial data'],
+            ['name' => 'finances.manage', 'description' => 'Manage financial data'],
+            ['name' => 'finances.reports', 'description' => 'View financial reports'],
+            ['name' => 'cash.open_close', 'description' => 'Open and close cash register'],
+            ['name' => 'payments.process', 'description' => 'Process payments'],
+            ['name' => 'discounts.approve', 'description' => 'Approve discounts'],
 
             // Kitchen Management
-            ['code' => 'kitchen.view_orders', 'description' => 'View kitchen orders'],
-            ['code' => 'kitchen.manage_preparation', 'description' => 'Manage order preparation'],
-            ['code' => 'kitchen.mark_ready', 'description' => 'Mark orders as ready in kitchen'],
+            ['name' => 'kitchen.view_orders', 'description' => 'View kitchen orders'],
+            ['name' => 'kitchen.manage_preparation', 'description' => 'Manage order preparation'],
+            ['name' => 'kitchen.mark_ready', 'description' => 'Mark orders as ready in kitchen'],
 
             // Printing & Hardware
-            ['code' => 'printing.tickets', 'description' => 'Print order tickets'],
-            ['code' => 'printing.configure', 'description' => 'Configure printers'],
-            ['code' => 'hardware.manage', 'description' => 'Manage hardware devices'],
-            ['code' => 'network.configure', 'description' => 'Configure network settings'],
+            ['name' => 'printing.tickets', 'description' => 'Print order tickets'],
+            ['name' => 'printing.configure', 'description' => 'Configure printers'],
+            ['name' => 'hardware.manage', 'description' => 'Manage hardware devices'],
+            ['name' => 'network.configure', 'description' => 'Configure network settings'],
 
             // Team Management
-            ['code' => 'teams.view', 'description' => 'View teams'],
-            ['code' => 'teams.create', 'description' => 'Create teams'],
-            ['code' => 'teams.update', 'description' => 'Update teams'],
-            ['code' => 'teams.delete', 'description' => 'Delete teams'],
-            ['code' => 'teams.assign_members', 'description' => 'Assign team members'],
+            ['name' => 'teams.view', 'description' => 'View teams'],
+            ['name' => 'teams.create', 'description' => 'Create teams'],
+            ['name' => 'teams.update', 'description' => 'Update teams'],
+            ['name' => 'teams.delete', 'description' => 'Delete teams'],
+            ['name' => 'teams.assign_members', 'description' => 'Assign team members'],
         ];
 
         foreach ($permissions as $permission) {
             Permission::getByCodeOrCreate([
-                'code' => $permission['code'],
+                'name' => $permission['name'],
                 'guard_name' => 'api',
                 'description' => $permission['description'],
             ]);
@@ -187,13 +187,13 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'code' => 'super_admin',
+                'name' => 'super_admin',
                 'name' => 'Super Administrator',
                 'description' => 'Has access to all system features and settings',
                 'permissions' => 'all' // Special case for all permissions
             ],
             [
-                'code' => 'owner',
+                'name' => 'owner',
                 'name' => 'Owner / Admin',
                 'description' => 'Company owner or general manager',
                 'permissions' => [
@@ -217,7 +217,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'manager',
+                'name' => 'manager',
                 'name' => 'Manager / Supervisor',
                 'description' => 'Responsible for daily operations',
                 'permissions' => [
@@ -236,7 +236,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'cashier',
+                'name' => 'cashier',
                 'name' => 'Cashier',
                 'description' => 'Handles payments and order registration',
                 'permissions' => [
@@ -251,7 +251,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'chef',
+                'name' => 'chef',
                 'name' => 'Chef / Kitchen',
                 'description' => 'Manages order preparation',
                 'permissions' => [
@@ -262,7 +262,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'waiter',
+                'name' => 'waiter',
                 'name' => 'Waiter',
                 'description' => 'Takes and manages table orders',
                 'permissions' => [
@@ -276,7 +276,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'accountant',
+                'name' => 'accountant',
                 'name' => 'Accountant',
                 'description' => 'Reviews finance and reports',
                 'permissions' => [
@@ -289,7 +289,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'inventory_manager',
+                'name' => 'inventory_manager',
                 'name' => 'Inventory Manager',
                 'description' => 'Manages stock and supplies',
                 'permissions' => [
@@ -300,7 +300,7 @@ class RoleSeeder extends Seeder
                 ]
             ],
             [
-                'code' => 'technical_support',
+                'name' => 'technical_support',
                 'name' => 'Technical Support',
                 'description' => 'Tenant-level internal support',
                 'permissions' => [
@@ -315,7 +315,6 @@ class RoleSeeder extends Seeder
 
         foreach ($roles as $roleData) {
             $role = Role::getByCodeOrCreate([
-                'code' => $roleData['code'],
                 'name' => $roleData['name'],
                 'guard_name' => 'api',
                 'description' => $roleData['description'],
@@ -326,15 +325,15 @@ class RoleSeeder extends Seeder
                 // Super admin gets all permissions
                 $role->givePermissionTo(Permission::where('guard_name', 'api')->get());
             } else {
-                // Get permissions by code
-                $permissions = Permission::whereIn('code', $roleData['permissions'])
+                // Get permissions by name
+                $permissions = Permission::whereIn('name', $roleData['permissions'])
                     ->where('guard_name', 'api')
                     ->get();
                 
                 $role->syncPermissions($permissions);
             }
 
-            $this->command->line("   ✅ Created role '{$roleData['code']}' with " . 
+            $this->command->line("   ✅ Created role '{$roleData['name']}' with " . 
                 (is_array($roleData['permissions']) ? count($roleData['permissions']) : 'all') . " permissions");
         }
     }
