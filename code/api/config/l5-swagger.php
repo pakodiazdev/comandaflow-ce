@@ -12,7 +12,7 @@ return [
                 /*
                  * Route for accessing api documentation JSON
                  */
-                'api' => 'api/docs.json',
+                'api' => 'api/v1/doc/docs.json',
             ],
             'paths' => [
                 /*
@@ -50,6 +50,7 @@ return [
                  */
                 'annotations' => [
                     base_path('app'),
+                    base_path('packages/hello-world/src'),
                 ],
             ],
         ],
@@ -59,7 +60,7 @@ return [
             /*
              * Route for accessing parsed swagger annotations.
              */
-            'docs' => 'api/swagger-docs',
+            'docs' => 'api/v1/doc',
 
             /*
              * Route for Oauth2 authentication callback.
